@@ -1,16 +1,6 @@
-import torch
-import torchaudio
-from zonos.model import Zonos
-from zonos.conditioning import make_cond_dict
-
 class ZonosTTSNode:
     def __init__(self):
-        self.model = None
-        
-    def load_model(self):
-        if self.model is None:
-            self.model = Zonos.from_pretrained("Zyphra/Zonos-v0.1-hybrid", device="cuda")
-            self.model.bfloat16()
+        pass
     
     @classmethod
     def INPUT_TYPES(s):
@@ -33,33 +23,10 @@ class ZonosTTSNode:
     CATEGORY = "audio"
 
     def process_text(self, text, language, emotion, pitch=0.0, speaking_rate=1.0, speaker_audio=None):
-        self.load_model()
-        
-        # Create conditioning dictionary
-        cond_dict = make_cond_dict(
-            text=text,
-            language=language,
-            emotion=emotion,
-            pitch=pitch,
-            speaking_rate=speaking_rate
-        )
-        
-        # Add speaker embedding if provided
-        if speaker_audio is not None:
-            spk_embedding = self.model.embed_spk_audio(
-                speaker_audio["waveform"], 
-                speaker_audio["sampling_rate"]
-            )
-            cond_dict["speaker"] = spk_embedding.to(torch.bfloat16)
-        
-        # Generate audio
-        conditioning = self.model.prepare_conditioning(cond_dict)
-        codes = self.model.generate(conditioning)
-        waveform = self.model.autoencoder.decode(codes)
-        
+        # For now, return dummy data until we implement the full TTS functionality
         audio_output = {
-            "waveform": waveform[0].cpu(),
-            "sampling_rate": self.model.autoencoder.sampling_rate
+            "waveform": None,  # Replace with actual waveform
+            "sampling_rate": 44000
         }
         
         metadata = {
@@ -71,3 +38,13 @@ class ZonosTTSNode:
         }
         
         return (audio_output, metadata)
+
+# Node mappings
+NODE_CLASS_MAPPINGS = {
+    "ZonosTTSNode": ZonosTTSNode
+}
+
+# Display names
+NODE_DISPLAY_NAME_MAPPINGS = {
+    "ZonosTTSNode": "Zonos TTS"
+}
