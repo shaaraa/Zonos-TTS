@@ -1,0 +1,2 @@
+# Ignore .safetensors files
+*.safetensors
