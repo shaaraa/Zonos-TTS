@@ -1,6 +1,3 @@
-import os
-import sys
-import torch
 from .nodes import ZonosTTSNode
 
 NODE_CLASS_MAPPINGS = {
@@ -20,7 +17,3 @@ REQUIREMENTS = [
 ]
 
 WEB_DIRECTORY = "web"
-DESCRIPTION = """A custom node for generating speech using the Zyphra/Zonos-v0.1-hybrid text-to-speech model.
-Supports multilingual text input, emotion control, and voice cloning."""
-
-__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY", "DESCRIPTION"]

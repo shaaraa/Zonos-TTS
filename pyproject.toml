@@ -1,0 +1,19 @@
+[project]
+name = "zonos-tts-comfyui"
+description = "Zonos TTS custom node for ComfyUI"
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = [
+    "torch>=2.0",
+    "torchaudio>=2.0",
+    "safetensors>=0.3.0",
+    "transformers>=4.30.0",
+    "huggingface_hub>=0.16.0",
+]
+
+[project.urls]
+Repository = "https://github.com/shaaraa/Zonos-TTS"
+
+[tool.comfy]
+PublisherId = "shaaraa"
+DisplayName = "Zonos TTS"
