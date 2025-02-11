@@ -7,6 +7,9 @@ app.registerExtension({
             const onNodeCreated = nodeType.prototype.onNodeCreated;
             nodeType.prototype.onNodeCreated = function() {
                 const r = onNodeCreated ? onNodeCreated.apply(this, arguments) : undefined;
+                
+                this.serialize_widgets = true; 
+                
                 return r;
             };
         }
