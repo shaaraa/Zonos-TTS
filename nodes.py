@@ -31,12 +31,13 @@ class ZonosTTSNode:
     CATEGORY = "audio"
 
     def process_text(self, text, language, emotion, speaker_audio=None, pitch=0.0, speaking_rate=1.0):
-        if self.model is None:
-            # Initialize model (simplified for example)
-            self.model = torch.nn.Module()
-            
-        # Placeholder for actual processing
-        audio = torch.randn(1, 16000)  # Random audio for example
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        audio_tensor = torch.randn(1, 44000)
+        audio_output = {
+            "waveform": audio_tensor,
+            "sampling_rate": 44000
+        }
+        
         metadata = {
             "text": text,
             "language": language,
@@ -45,4 +46,4 @@ class ZonosTTSNode:
             "speaking_rate": speaking_rate
         }
         
-        return (audio, metadata)
+        return (audio_output, metadata)
