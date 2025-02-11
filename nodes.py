@@ -1,3 +1,5 @@
+import torch
+
 class ZonosTTSNode:
     def __init__(self):
         pass
@@ -23,9 +25,14 @@ class ZonosTTSNode:
     CATEGORY = "audio/tts"
 
     def process_text(self, text, language, emotion, pitch=0.0, speaking_rate=1.0, speaker_audio=None):
-        # For testing, return dummy data
+        # Create a dummy waveform for testing (1 second of audio at 44kHz)
+        # Shape: [batch_size=1, num_samples]
+        dummy_waveform = torch.zeros((1, 44000), dtype=torch.float32)
+        # Add some noise to make it "audio-like"
+        dummy_waveform = dummy_waveform + torch.randn_like(dummy_waveform) * 0.1
+        
         audio_output = {
-            "waveform": None,  # Replace with actual waveform
+            "waveform": dummy_waveform,
             "sampling_rate": 44000
         }
         
