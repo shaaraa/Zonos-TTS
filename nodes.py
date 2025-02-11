@@ -20,10 +20,10 @@ class ZonosTTSNode:
     RETURN_TYPES = ("AUDIO", "JSON")
     RETURN_NAMES = ("audio", "metadata")
     FUNCTION = "process_text"
-    CATEGORY = "audio"
+    CATEGORY = "audio/tts"
 
     def process_text(self, text, language, emotion, pitch=0.0, speaking_rate=1.0, speaker_audio=None):
-        # For now, return dummy data until we implement the full TTS functionality
+        # For testing, return dummy data
         audio_output = {
             "waveform": None,  # Replace with actual waveform
             "sampling_rate": 44000
@@ -34,7 +34,8 @@ class ZonosTTSNode:
             "language": language,
             "emotion": emotion,
             "pitch": pitch,
-            "speaking_rate": speaking_rate
+            "speaking_rate": speaking_rate,
+            "has_speaker": speaker_audio is not None
         }
         
         return (audio_output, metadata)
