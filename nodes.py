@@ -3,12 +3,12 @@ import torchaudio
 
 class ZonosTTSNode:
     @classmethod
-    def INPUT_TYPES(cls):
+    def INPUT_TYPES(s):
         return {
             "required": {
                 "text": ("STRING", {"multiline": True}),
-                "language": (["en-us", "ja", "zh", "fr", "de"],), 
-                "emotion": (["neutral", "happiness", "anger", "sadness", "fear"],),
+                "language": (["en-us", "ja", "zh", "fr", "de"], {"default": "en-us"}),
+                "emotion": (["neutral", "happiness", "anger", "sadness", "fear"], {"default": "neutral"}),
                 "pitch": ("FLOAT", {"default": 0.0, "min": -1.0, "max": 1.0}),
                 "speaking_rate": ("FLOAT", {"default": 1.0, "min": 0.5, "max": 2.0}),
             },
@@ -17,7 +17,8 @@ class ZonosTTSNode:
             }
         }
 
-    RETURN_TYPES = ("AUDIO", "JSON")
+    RETURN_TYPES = ("AUDIO", "JSON",)
+    RETURN_NAMES = ("audio", "metadata",)
     FUNCTION = "process_text"
     CATEGORY = "audio"
 
