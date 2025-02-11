@@ -1,7 +1,7 @@
 import os
 import sys
 import torch
-from nodes import ZonosTTSNode
+from .nodes import ZonosTTSNode
 
 NODE_CLASS_MAPPINGS = {
     "ZonosTTSNode": ZonosTTSNode,
